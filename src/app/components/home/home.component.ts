@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
+import { UserRestService } from 'src/app/services/user-rest.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  token:any;
+
 
   constructor(
-    public router: Router
+    public router: Router,
+    private userRest: UserRestService
   ) { }
 
   home(){
@@ -18,6 +21,7 @@ export class HomeComponent implements OnInit {
     
   }
   ngOnInit(): void {
+    this.token = this.userRest.getToken();
   }
 
 }

@@ -24,9 +24,9 @@ export class UsersComponent implements OnInit {
     this.getUsers()
   } 
 
-  getUser(id:string){
+  getUser(id: string){
     this.clientRest.getUser(id).subscribe({
-      next: (res:any)=>this.idUser = res.user, 
+      next: (res:any)=>this.userGetId = res.user, 
       error: (err)=> console.log(err)
     })
   }
@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit {
   })
  }
  updateUser(){
-  this.clientRest.updateUser(this.userGetId._id, this.userGetId).subscribe({
+  this.clientRest.updateUser( this.userGetId, this.userGetId._id).subscribe({
     next: (res:any)=> {
       Swal.fire ({ icon: 'success', title: res.message,});
       this.getUsers();

@@ -39,8 +39,8 @@
         <img src="https://image.winudf.com/v2/image/Y29tLnBhbmRvcmFpbnRlcmFjdGl2ZS5jb3BhY2hhbXBpb25zX3NjcmVlbnNob3RzXzBfMmIyZDNlMTk/screen-0.jpg?fakeurl=1&type=.webp" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Ligas</h5>
-          <p class="card-text">Organiza tus Ligas, Torneos y Equipos aquí:</p>
-          <button class="btn btn-secondary">Aquí</button>
+          <p *ngIf="token" class="card-text">Organiza tus Ligas, Torneos y Equipos aquí:</p>
+          <button *ngIf="token" routerLink="/league" class="btn btn-secondary">Aquí</button>
         </div>
       </div>
       <div class="card">
