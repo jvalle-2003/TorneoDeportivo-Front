@@ -1,0 +1,243 @@
+<app-navbar></app-navbar>
+
+
+<link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/components/buttons/">
+<div class="text-center m-3">
+  <button type="button" class="btn btn-outline-primary  margin-left" data-bs-toggle="modal"
+    data-bs-target="#exampleModal">Agregar Equipos</button>
+  <button (click)="getJornadas()" type="button" class="btn btn-outline-warning  margin-left" data-bs-toggle="modal" data-bs-target="#"
+    href="#exampleModalToggle">Agregar Marcador</button>
+  <button (click)="getEquipos()"  href="#exampleModalTabla" type="button" class="btn btn-outline-success 2 margin-left" data-bs-toggle="modal" data-bs-target="#">Ver
+    Tabla</button>
+  <button type="button" class="btn btn-outline-info  margin-left" data-bs-toggle="modal"
+    data-bs-target="#">Gráficos</button>
+</div>
+
+<hr>
+<div class="row justify-content-center px-4" >
+  <div *ngFor="let equipo of equipos" class="card m-4" style="width: 18rem; ">
+    <img src="https://images.vexels.com/media/users/3/132208/isolated/preview/b6c63f2ec9d7dc0b53c71d47dc800561-logo-de-futbol.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h3 class="card-title" style="text-align: center;">{{ equipo.name }}</h3>
+      <div class="text-center  ms-3">
+        <button  (click)="getEquipo(equipo.id)" class="btn btn-warning m-2" data-bs-toggle="offcanvas" 
+        data-bs-target="#offcanvasExample" 
+        aria-controls="offcanvasExample">
+          Actualizar</button>
+        <button  (click)="deleteEquipo(equipo.id)" class="btn btn-danger ">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo Equipo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addEquipoForm="ngForm">
+          <div class="mb-3">
+            <label  class="form-label">Nombre</label>
+            <input [(ngModel)]="equipo.name" name= "name" type="text" class="form-control" >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="saveEquipo(addEquipoForm)" type="button" class="btn btn-primary" 
+        data-bs-dismiss="modal">Guardar Equipo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Ver ResultadoModal-->
+<div class="modal fade" id="modalGetResultados" tabindex="-1" aria-labelledby="modalGetResultLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Partidos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Equipo 1</th>
+              <th scope="col">Goles</th>
+              <th scope="col">Equipo 2</th>
+              <th scope="col">Goles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resultado of resultados">
+              <td>{{ resultado.equipo_1.name}}</td>
+              <td>{{ resultado.goles1 }}</td>
+              <td>{{ resultado.equipo_2.name}}</td>
+              <td>{{ resultado.goles2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div  class="text-center mb-2">
+        <button  class="btn btn-success" style="margin-right: 2%;" data-bs-toggle="modal" href="#exampleModalToggle"
+        >Regresar</button>
+        <button  class="btn btn-success" style="margin-right: 2%;" data-bs-toggle="modal" 
+         href="#exampleModalToggle2">Agregar partido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Actualizar Equipo</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    
+    <form class="form-inline text-center" (ngSubmit)="updateEquipo()" *ngIf="equipoGetId">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="nameUpdate" class="form-label">Ingresar nuevo nombre para Equipo</label>
+        <input [(ngModel)]="equipoGetId.name " name="name" type="text" class="form-control" id="nameUpdate" placeholder="">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2" data-bs-dismiss="offcanvas">Guardar</button>
+    </form> 
+
+  </div>
+</div>
+
+<!--Modals Marcador-->
+<div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalToggleLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Jornadas</h5>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Jornada</th>
+
+              <th scope="col" class="d-flex me-5">Acciones</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let jornada of jornadas" >
+              <th>{{jornada.name}}</th>
+              <td>
+                <button (click)="getResult(jornada._id)" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                href="#modalGetResultados" >Ver</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal add match-->
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar partido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addJornadaForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Equipo 1</label>
+            <select [(ngModel)]="resultado.equipo_1" name="equipo1" class="form-select">
+              <option *ngFor="let equipo of equipos" value="{{equipo._id}}">{{ equipo.name }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Goles equipo 1</label>
+            <input [(ngModel)]="resultado.goles1" name="goles1" type="number" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Equipo 2</label>
+            <select [(ngModel)]="resultado.equipo_2" name="team2" class="form-select">
+              <option *ngFor="let equipo of equipos" value="{{equipo._id}}">{{ equipo.name }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Goles equipo 2</label>
+            <input [(ngModel)]="resultado.goles2" name="goles2" type="number" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button href="#modalGetResultados" type="button" class="btn btn-secondary" data-bs-toggle="modal"
+              data-bs-target="#modal">Regresar</button>
+            <button type="submit" (click)="saveJornadaResult(addJornadaForm)" class="btn btn-primary" 
+              data-bs-toggle="modal">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+<!--MODALTabla-->
+<div class="modal fade" id="exampleModalTabla" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div>
+        <h1 class="h1" >Tabla de Posiciones</h1>
+      </div>
+      <div class="modal-header">
+        <table class="container">
+          <thead>
+            <tr>
+              <th>
+                <h1>Name</h1>
+              </th>
+              <th>
+                <h1>PJ</h1>
+              </th>
+              <th>
+                <h1>GF</h1>
+              </th>
+              <th>
+                <h1>GC</h1>
+              </th>
+              <th>
+                <h1>DG</h1>
+              </th>
+              <th>
+                <h1>PTS</h1>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let equipo of equipos">
+              <td> {{ equipo.name }} </td>
+              <td> {{ equipo.partidos }} </td>
+              <td> {{ equipo.golesFavor }} </td>
+              <td> {{ equipo.golesContra }} </td>
+              <td> {{ equipo.difGoles }} </td>
+              <td> {{ equipo.puntos }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button"  class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+

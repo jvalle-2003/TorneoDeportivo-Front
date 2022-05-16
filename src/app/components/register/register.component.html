@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="http://pngimg.com/uploads/fifa/fifa_PNG25.png" alt="" />
+            <h3>League</h3>
+            <p>Create your own league here!</p>
+        </div>
+        <div class="col-md-9 register-right">
+            <form (ngSubmit)="register()" #registerForm="ngForm" class="mx-1 mx-md-4">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Register Here</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <span *ngIf="!name.valid && name.touched" class="requiredField">Required Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.name" #name="ngModel" name=name type="text"
+                                        class="form-control" placeholder="First Name *" value="" required />
+                                </div>
+                                <span *ngIf="!surname.valid && surname.touched" class="requiredField">Required
+                                    Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.surname" #surname="ngModel" name=surname type="text"
+                                        class="form-control" placeholder="Last Name *" value="" required />
+                                </div>
+                                <span *ngIf="!username.valid && username.touched" class="requiredField">Required
+                                    Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.username" #username="ngModel" name=username type="text"
+                                        class="form-control" placeholder="Username *" value="" required />
+                                </div>
+                                <span *ngIf="!password.valid && password.touched" class="requiredField">Required
+                                    Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.password" #password="ngModel" name="password"
+                                        type="password" class="form-control" placeholder="Password *" value=""
+                                        required />
+                                </div>
+                                <span *ngIf="!repeat.valid && repeat.touched" class="requiredField">Required
+                                    Field</span>
+                                <div class="form-group">
+                                    <input (keyup)="checkPassword()" #repeat="ngModel" [(ngModel)]="repeatPassword"
+                                        name="repeatPassword" type="password" class="form-control"
+                                        placeholder="Confirm Password *" value="" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span *ngIf="!email.valid && email.touched" class="requiredField">Required Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.email" #email="ngModel" name="email" type="email"
+                                        class="form-control" placeholder="Your Email *" value="" required />
+                                </div>
+                                <span *ngIf="!phone.valid && phone.touched" class="requiredField">Required Field</span>
+                                <div class="form-group">
+                                    <input [(ngModel)]="user.phone" #phone="ngModel" name="phone" type="text" class="form-control"
+                                        placeholder="Your Phone *" value="" required />
+                                    </div>
+                                <div class="form-check d-flex justify-content-left mb-3">
+                                    <input
+                                      ngModel
+                                      name="check"
+                                      class="form-check-input me-2"
+                                      type="checkbox"
+                                      value=""
+                                      id="form2Example3c"
+                                      required
+                                    />
+                                    <label class="form-check-label" for="form2Example3">
+                                    
+                                        <a>I agree all statements in Terms of service</a>
+                                    </label>
+                                  </div>
+                                <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-primary btn-lg">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

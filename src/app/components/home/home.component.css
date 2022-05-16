@@ -1,0 +1,29 @@
+
+.carousel-item{
+    transition: 2s;
+}
+.home{
+    background-color: #f2f2f2;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.card-group{
+    background-color: #f2f2f2;
+}
+
+.card{
+    background-color: #ced4da;
+    color: #222222;
+    border-color: #000;
+    border-width: 5px;
+    text-align: center;
+}
+
+.card h5{
+    text-align: center;
+    font-weight: 800;
+    color: black;
+}
+
+

@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<section class="login-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 login-sec">
+                <h2 class="text-center">Login Here</h2>
+                
+                <form (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" >Username</label>
+                        <input [(ngModel)]="user.username" name="username" type="text" class="form-control" placeholder="">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" >Password</label>
+                        <input [(ngModel)]="user.password" name="password" type="password" class="form-control" placeholder="">
+                    </div>
+
+                
+                <div class="form-check"> 
+                    <button type="submit" value="submit" class="btn btn-login float-right">Submit</button>
+                </div>
+                  
+                <div id="formFooter">
+                    <a class="underlineHover" href="#">Forgot Password?</a>
+                  </div>
+                </form>  
+            </div>
+            <div class="col-md-8 banner-sec">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="" >
+                        <div class="">
+                            <img class="d-block w-100" src="https://www.especialistasdeldeporte.com/wp-content/uploads/2021/04/ChampionsLeague-1200x900-1.jpg"
+                                alt="">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>Tournament League</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
