@@ -42,7 +42,7 @@ export class EquipoRestService {
     });
   }
 
-  updateEquipo(idLeague: string, idEquipo: string,params: {},) {
+  updateEquipo( params: {}, idLeague: string, idEquipo: string) {
     return this.http.put(
       environment.baseUrl + 'equipo/updateEquipo/' + idLeague + '/' + idEquipo,
       params,

@@ -69,19 +69,24 @@ export class TeamsComponent implements OnInit {
   }, 
   })
  }
- getEquipo(id:string){
-  this.equipoRest.getEquipo(this.idLeague, id).subscribe({
+
+ getEquipo(idEquipo:string){
+  this.equipoRest.getEquipo(this.idLeague, idEquipo).subscribe({
     next: (res:any)=>{
-      this.equipoGetId = res.league;
+      this.equipoGetId = res.equipo;
+      console.log(this.equipoGetId)
     },
     error: (err)=> alert(err.error.message)
   })
  }
+
  updateEquipo(){
-  this.equipoGetId.user= undefined;
-  this.equipoGetId.equipos = undefined;
-  this.equipoGetId.jornadas =  undefined;
-  this.equipoGetId.updateEquipo(this.equipoGetId._id, this.equipoGetId).subscribe({
+  this.equipoGetId.golesFavor= undefined;
+  this.equipoGetId.golesContra = undefined;
+  this.equipoGetId.difGoles =  undefined;
+  this.equipoGetId.partidos =  undefined;
+  this.equipoGetId.puntos =  undefined;
+  this.equipoRest.updateEquipo( this.equipoGetId, this.idLeague, this.equipoGetId._id ).subscribe({
     next: (res:any)=> {
       Swal.fire ({ icon: 'success', title: res.message,});
       this.getEquipos();
@@ -91,11 +96,11 @@ export class TeamsComponent implements OnInit {
   })
  }
  
- deleteEquipo(id:string){
-  this.equipoRest.deleteEquipo(this.idLeague, id).subscribe({
+ deleteEquipo(idEquipo:string){
+  this.equipoRest.deleteEquipo(this.idLeague, idEquipo).subscribe({
     next: (res:any)=> {
       Swal.fire({
-        title: res.message + ' ' + res.equipoDelete.name,
+        title: res.message + ' ' + res.deleteEquipo.name,
         icon: 'success',
         position: 'center',
         showConfirmButton: false,
